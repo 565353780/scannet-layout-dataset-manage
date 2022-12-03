@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from scannet_layout_dataset_manage.Data.dataset import Dataset
+from scannet_layout_dataset_manage.Method.depth import \
+    getDepthPoints, getLayoutDepthPoints, getUniformDepthPoints
 from scannet_layout_dataset_manage.Method.render import \
     renderLayoutDepthImage, renderLayoutDepthPCD
 
@@ -43,6 +45,19 @@ class DatasetLoader(object):
         assert scene_name is not None and view_name is not None
         view = self.getView(scene_name, view_name)
         return func(view)
+
+    def getDepthPoints(self, scene_name=None, view_name=None, view=None):
+        return self.funcView(getDepthPoints, scene_name, view_name, view)
+
+    def getLayoutDepthPoints(self, scene_name=None, view_name=None, view=None):
+        return self.funcView(getLayoutDepthPoints, scene_name, view_name, view)
+
+    def getUniformDepthPoints(self,
+                              scene_name=None,
+                              view_name=None,
+                              view=None):
+        return self.funcView(getUniformDepthPoints, scene_name, view_name,
+                             view)
 
     def renderLayoutDepthImage(self,
                                scene_name=None,

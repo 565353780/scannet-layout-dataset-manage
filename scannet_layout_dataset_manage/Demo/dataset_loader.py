@@ -32,4 +32,9 @@ def demo():
         dataset_loader.renderLayoutDepthImage(view=view)
 
         dataset_loader.renderLayoutDepthPCD(view=view)
+
+        depth_points, layout_depth_points = dataset_loader.getUniformDepthPoints(
+            view=view)
+        print(depth_points.shape)
+        print(layout_depth_points.shape)
     return True
