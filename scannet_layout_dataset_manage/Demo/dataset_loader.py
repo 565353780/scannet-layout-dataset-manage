@@ -25,15 +25,11 @@ def demo():
 
     if len(view_name_list) > 0:
         view_name = view_name_list[0]
+
         view = dataset_loader.getView(scene_name, view_name)
         view.outputInfo()
 
-        depth_image_file_path = view.depth_image_file_path
-        depth_image = cv2.imread(depth_image_file_path)
+        dataset_loader.renderLayoutDepthImage(view=view)
 
-        layout_depth_image = dataset_loader.getLayoutDepthImage(view=view)
-
-        cv2.imshow("depth_image", depth_image)
-        cv2.imshow("layout_depth_image", layout_depth_image)
-        cv2.waitKey(0)
+        dataset_loader.renderLayoutDepthPCD(view=view)
     return True
