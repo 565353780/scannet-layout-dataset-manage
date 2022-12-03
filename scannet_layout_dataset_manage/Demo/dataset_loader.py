@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import cv2
+import numpy as np
+
 from scannet_layout_dataset_manage.Module.dataset_loader import DatasetLoader
 
 
@@ -24,4 +27,13 @@ def demo():
         view_name = view_name_list[0]
         view = dataset_loader.getView(scene_name, view_name)
         view.outputInfo()
+
+        depth_image_file_path = view.depth_image_file_path
+        depth_image = cv2.imread(depth_image_file_path)
+
+        layout_depth_image = dataset_loader.getLayoutDepthImage(view=view)
+
+        cv2.imshow("depth_image", depth_image)
+        cv2.imshow("layout_depth_image", layout_depth_image)
+        cv2.waitKey(0)
     return True

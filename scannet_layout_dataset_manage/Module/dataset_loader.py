@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from scannet_layout_dataset_manage.Data.dataset import Dataset
+from scannet_layout_dataset_manage.Method.render import getLayoutDepthImage
 
 
 class DatasetLoader(object):
@@ -33,3 +34,11 @@ class DatasetLoader(object):
     def getView(self, scene_name, view_name):
         assert self.isViewNameValid(scene_name, view_name)
         return self.dataset.scene_dict[scene_name].view_dict[view_name]
+
+    def getLayoutDepthImage(self, scene_name=None, view_name=None, view=None):
+        if view is not None:
+            return getLayoutDepthImage(view)
+
+        assert scene_name is not None and view_name is not None
+        view = self.getView(scene_name, view_name)
+        return getLayoutDepthImage(view)
